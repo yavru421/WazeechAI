@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>PWA Starter</title>
+
+    <!-- Set base href to match Vite config for production -->
+    <base href="/pwllama/" />
+
+    <!-- Responsive Web Design meta tags -->
+    <meta
+      name="viewport"
+      content="viewport-fit=cover, width=device-width, initial-scale=1.0"
+    />
+    <meta name="description" content="This is a PWA Starter app" />
+
+    <!-- Theme color and Apple-specific meta tags -->
+    <meta name="theme-color" content="#317EFB" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="PWA Starter" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+    <!-- PWA Starter CLI template project identifier -->
+    <meta name="pwa-starter-template-identity" content="pwa-starter" />
+
+    <!-- Favicon and Apple Touch Icon -->
+    <link rel="icon" href="/assets/icons/icon_24.png" type="image/png" />
+    <link
+      rel="apple-touch-icon"
+      href="/assets/icons/icon_192.png"
+      sizes="192x192"
+    />
+
+    <!-- Manifest for PWA -->
+    <link rel="manifest" href="manifest.json" />
+
+    <!-- Light and dark mode CSS -->
+    <link
+      rel="stylesheet"
+      media="(prefers-color-scheme:light)"
+      href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.16.0/dist/themes/light.css"
+    />
+    <link
+      rel="stylesheet"
+      media="(prefers-color-scheme:dark)"
+      href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.16.0/dist/themes/dark.css"
+      onload="document.documentElement.classList.add('sl-theme-dark');"
+    />
+
+    <!-- Shoelace base path script -->
+    <script type="module">
+      import { setBasePath } from '@shoelace-style/shoelace/dist/utilities/base-path.js';
+      setBasePath(
+        'https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.16.0/cdn/'
+      );
+    </script>
+
+    <!-- App index script -->
+    <script type="module" src="/src/app-index.ts" defer></script>
+  </head>
+
+  <body>
+    <!-- App index web component -->
+    <app-index></app-index>
+
+    <!-- Service worker registration script -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          const swPath = window.location.pathname.startsWith('/pwllama')
+            ? '/pwllama/sw.js'
+            : '/sw.js';
+          navigator.serviceWorker.register(swPath).catch((e) => {
+            console.warn('Service worker registration failed:', e);
+          });
+        });
+      }
+    </script>
+  </body>
+</html>
+

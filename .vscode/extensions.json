@@ -1,0 +1,7 @@
+{
+  "recommendations": [
+    "christian-kohler.npm-intellisense",
+    "ms-edgedevtools.vscode-edge-devtools",
+    "PWABuilder.pwa-studio"
+  ]
+}
